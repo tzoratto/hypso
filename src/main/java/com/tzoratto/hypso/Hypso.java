@@ -26,7 +26,7 @@ public class Hypso {
 
 
     public static void main(String[] args) {
-        checkScript();
+        checkConfig();
 
         if (PORT != null) {
             port(Integer.parseInt(PORT));
@@ -102,13 +102,16 @@ public class Hypso {
         });
     }
 
-    private static void checkScript() {
+    private static void checkConfig() {
         LOGGER.info("Script path : " + SCRIPT);
         Path path = Paths.get(SCRIPT);
         if (!Files.exists(path)) {
             LOGGER.error("Script file not found");
         } else if (!Files.isExecutable(path)) {
             LOGGER.error("Script file not executable");
+        }
+        if (FAYA_NAMESPACE == null) {
+            LOGGER.error("Faya namespace not set");
         }
     }
 }
