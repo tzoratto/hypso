@@ -1,0 +1,41 @@
+= Hypso
+
+== Description
+
+Hypso is a simple web server that executes a given script when it receives a request.
+Its main purpose is to deploy containers on image update thanks to Docker hub web hooks.
+
+It leverages Faya tokens to act only upon authorized requests.
+
+== Configuration
+
+.Environment variables
+[options="header"]
+|===
+|Name |Default |Description
+
+|SCRIPT
+|null
+|Absolute path of the target script
+
+|FAYA_URL
+|null
+|Faya instance URL
+
+|FAYA_API_KEY
+|null
+|Faya API key
+
+|FAYA_NAMESPACE
+|null
+|A Faya namespace name to valid token against
+|===
+
+Once the configuration is done, simply make an HTTP POST request to
+
+ /trigger?token=<FAYA_TOKEN>
+
+in order to trigger script execution.
+
+[NOTE]
+It is highly recommended to set up a reverse proxy providing HTTPS support
