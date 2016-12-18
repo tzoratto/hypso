@@ -18,6 +18,7 @@ public class Hypso {
     private static final Logger LOGGER = LoggerFactory.getLogger(Hypso.class);
 
     private static final String SCRIPT = System.getenv("SCRIPT");
+    private static final String PORT = System.getenv("PORT");
     private static final String FAYA_URL = System.getenv("FAYA_URL");
     private static final String FAYA_API_KEY = System.getenv("FAYA_API_KEY");
     private static final String FAYA_NAMESPACE = System.getenv("FAYA_NAMESPACE");
@@ -26,6 +27,10 @@ public class Hypso {
 
     public static void main(String[] args) {
         checkScript();
+
+        if (PORT != null) {
+            port(Integer.parseInt(PORT));
+        }
 
         post("/trigger", (req, res) -> {
             try {

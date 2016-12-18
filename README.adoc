@@ -18,6 +18,10 @@ It leverages Faya tokens to act only upon authorized requests.
 |null
 |Absolute path of the target script
 
+|PORT
+|4567
+|Hypso port
+
 |FAYA_URL
 |null
 |Faya instance URL
