@@ -43,3 +43,22 @@ in order to trigger script execution.
 
 [NOTE]
 It is highly recommended to set up a reverse proxy providing HTTPS support
+
+== Docker
+
+To run Hypso in Docker :
+
+[source]
+----
+docker run \
+-e FAYA_URL=<FAYA_URL> \
+-e FAYA_API_KEY=<FAYA_AKI_KEY> \
+-e FAYA_NAMESPACE=<FAYA_NAMESPACE> \
+-e DOCKER_GID=<DOCKER_GID> \
+-p 4567:4567 \
+-v <SCRIPT_PATH>:/home/hypso/script/ \
+-v /var/run/docker.sock:/var/run/docker.sock \
+tzoratto/hypso
+----
+
+Hypso will execute *<SCRIPT_PATH>/deploy.sh*. This script can contain Docker and docker-compose commands.
