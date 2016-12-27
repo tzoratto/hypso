@@ -24,6 +24,10 @@ public class Hypso {
     private static final String FAYA_NAMESPACE = System.getenv("FAYA_NAMESPACE");
     private static final FayaInstance FAYA_INSTANCE = new FayaInstance(FAYA_URL, FAYA_API_KEY);
 
+    private Hypso() {
+        throw new IllegalAccessError();
+    }
+
 
     public static void main(String[] args) {
         checkConfig();
@@ -44,8 +48,7 @@ public class Hypso {
                     return forbidden(res, "Invalid token \"" + token +"\". " + req.ip() + " " + req.userAgent());
                 }
             } catch (Exception e) {
-                LOGGER.error("Something went wrong.", e);
-                return error(res, null);
+                return error(res, "Something went wrong.", e);
             }
         });
     }
@@ -59,10 +62,10 @@ public class Hypso {
             logScriptOutput(pr);
             exitCode = pr.waitFor();
         } catch (Exception e) {
-            return error(res, "Error during script execution. Details : " + e.getMessage());
+            return error(res, "Error during script execution. Details : " + e.getMessage(), e);
         }
         if (exitCode != 0) {
-            return error(res, "Error during script execution. Exit code : " + exitCode);
+            return error(res, "Error during script execution. Exit code : " + exitCode, null);
         } else {
             return success(res, "Script execution is complete");
         }
@@ -76,8 +79,10 @@ public class Hypso {
         return "fail";
     }
 
-    private static String error(Response res, String message) {
-        if (message != null) {
+    private static String error(Response res, String message, Exception e) {
+        if (e != null && message != null) {
+            LOGGER.error(message, e);
+        } else if (message != null) {
             LOGGER.error(message);
         }
         res.status(500);
@@ -105,7 +110,7 @@ public class Hypso {
     private static void checkConfig() {
         LOGGER.info("Script path : " + SCRIPT);
         Path path = Paths.get(SCRIPT);
-        if (!Files.exists(path)) {
+        if (!path.toFile().exists()) {
             LOGGER.error("Script file not found");
         } else if (!Files.isExecutable(path)) {
             LOGGER.error("Script file not executable");
