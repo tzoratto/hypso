@@ -9,8 +9,8 @@
 
     <scm>
         <url>https://gitlab.tzoratto.com/stav/hypso</url>
-        <connection>scm:git:https://gitlab.tzoratto.com/stav/hypso.git</connection>
-        <developerConnection>scm:git:https://gitlab.tzoratto.com/stav/hypso.git</developerConnection>
+        <connection>scm:git:ssh://git@gitlab.tzoratto.com:10022/stav/hypso.git</connection>
+        <developerConnection>scm:git:ssh://git@gitlab.tzoratto.com:10022/stav/hypso.git</developerConnection>
     </scm>
 
     <properties>
