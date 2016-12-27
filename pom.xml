@@ -18,6 +18,34 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>tzoratto_all</id>
+            <name>tzoratto all</name>
+            <url>https://nexus.tzoratto.com/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>tzoratto_release</id>
+            <name>tzoratto release</name>
+            <url>https://nexus.tzoratto.com/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>tzoratto_snapshot</id>
+            <name>tzoratto snapshot</name>
+            <url>https://nexus.tzoratto.com/repository/maven-snapshots/</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
