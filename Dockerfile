@@ -11,7 +11,7 @@ RUN apk --update --no-cache \
     curl https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION}.tgz | tar zx && \
     mv /docker/* /bin/ && chmod +x /bin/docker* && \
     pip install docker-compose==${DOCKER_COMPOSE_VERSION} && \
-    apk del curl py-pip
+    apk del curl
 
 WORKDIR /home/hypso
 
